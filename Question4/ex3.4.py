@@ -16,12 +16,49 @@ class CircularQueue:
         self._lock.release()
 
     def enqueue(self, data):
-        # Implement enqueue function
-        pass
-    
+        while True:
+            # Try to acquire lock on the queue
+            self.lock()
+
+            # Check if queue is full
+            if (self.tail + 1) % self.size == self.head:
+                # Queue is full, wait for 1 second and try again
+                self.unlock()
+                time.sleep(1)
+                continue
+            else:
+                # Queue has space, insert the element and release the lock
+                if self.head == -1:
+                    # First element
+                    self.head = 0
+                self.tail = (self.tail + 1) % self.size
+                self.queue[self.tail] = data
+                self.unlock()
+                return
+
     def dequeue(self):
-        # Implement dequeue function
-        pass
+        while True:
+            # Try to acquire lock on the queue
+            self.lock()
+
+            # Check if queue is empty
+            if self.head == -1:
+                # Queue is empty, wait for 1 second and try again
+                self.unlock()
+                time.sleep(1)
+                continue
+            else:
+                # Queue has elements, remove the head element and release the lock
+                data = self.queue[self.head]
+                if self.head == self.tail:
+                    # Last element
+                    self.head = -1
+                    self.tail = -1
+                else:
+                    self.head = (self.head + 1) % self.size
+                self.unlock()
+                return data
+
 
 def producer():
     while True:
