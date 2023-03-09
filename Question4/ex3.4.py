@@ -49,8 +49,29 @@ def producer():
 
 def consumer():
     while True:
-        # Implement consumer function
-        pass
+        # Generate a random number between 1 and 10
+        num = random.randint(1, 10)
+        
+        # Wait for num seconds
+        time.sleep(num)
+        
+        # Dequeue a number from the queue and print it to the terminal
+        q.lock()
+        if q.head == -1:
+            # Queue is empty
+            q.unlock()
+            continue
+        else:
+            data = q.queue[q.head]
+            if q.head == q.tail:
+                # Last element
+                q.head = -1
+                q.tail = -1
+            else:
+                q.head = (q.head + 1) % q.size
+            q.unlock()
+            print(data)
+
 
 if __name__ == '__main__':
     q = CircularQueue(5)
