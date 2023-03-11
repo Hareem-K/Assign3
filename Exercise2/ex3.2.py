@@ -25,7 +25,7 @@ with open('ex2data.json', 'r') as arr:
 # Load the list of search tasks
 with open('ex2tasks.json', 'r') as task:
     tasks = json.load(task)
-
+    
     
 def binary_search(array, target, start, end, midpoint):
     if start > end:
