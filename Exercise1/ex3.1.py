@@ -1,3 +1,9 @@
+"""
+Class: ENSF 338, W23
+Names: Hareem Khan, Eeman Abid
+Assignment: 3
+"""
+
 import sys
 
 # Define a stack class
