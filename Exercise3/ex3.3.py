@@ -1,7 +1,3 @@
-import sys
-
-list =[]
-old_capacity= sys.getsizeof(list)
 
 for x in range(64):
     list.append(x)
