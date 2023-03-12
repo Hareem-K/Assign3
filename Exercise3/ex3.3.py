@@ -1,3 +1,13 @@
+"""
+Class: ENSF 338, W23
+Names: Hareem Khan, Eeman Abid
+Assignment: 3
+"""
+
+import sys
+
+list =[]
+old_capacity= sys.getsizeof(list)
 
 for x in range(64):
     list.append(x)
